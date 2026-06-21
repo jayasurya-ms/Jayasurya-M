@@ -57,7 +57,7 @@ export default function Navbar() {
               </NavLink>
             ))}
             <a
-              href="/resume.pdf"
+              href="/Jayasurya.pdf"
               download
               className="cyber-button flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
             >
