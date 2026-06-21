@@ -33,7 +33,7 @@ export default function Navbar() {
           {/* Logo container always visible */}
           <div className="transition-all duration-500 block bg-transparent">
             <NavLink to="/" className="text-white font-bold text-xl">
-              Jayasurya<span className="text-pink-500"> M</span>
+              Jayasurya<span className="text-purple-400"> M</span>
             </NavLink>
           </div>
 
@@ -46,10 +46,10 @@ export default function Navbar() {
                 key={link.name}
                 to={link.path}
                 className={({ isActive }) =>
-                  `text-md font-bold transition-colors hover:text-pink-500 ${
+                  `text-md font-bold transition-colors hover:text-purple-300 ${
                     isActive
-                      ? "text-pink-500 shadow-[0_2px_0_0_#d618a3]"
-                      : "text-white"
+                      ? "text-purple-500 shadow-[0_2px_0_0_#a855f7] glow-text-purple"
+                      : "text-white/80 hover:text-white"
                   }`
                 }
               >
@@ -59,7 +59,7 @@ export default function Navbar() {
             <a
               href="/resume.pdf"
               download
-              className="flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-fuchsia-600 to-pink-500 text-white rounded-full text-sm font-medium hover:from-fuchsia-500 hover:to-pink-400 shadow-md transition-all"
+              className="cyber-button flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all"
             >
               <Download className="w-4 h-4" />
               Resume
@@ -71,7 +71,7 @@ export default function Navbar() {
             className={`transition-all duration-500 ${isScrolled ? "block" : "md:hidden"}`}
           >
             <button
-              className="flex cursor-pointer hover:rotate-90 transition-all duration-500 ease-in-out items-center justify-center p-3 rounded-full text-indigo-100 hover:text-blend z-50!"
+              className="flex cursor-pointer hover:rotate-90 transition-all duration-500 ease-in-out items-center justify-center p-3 rounded-full text-purple-100 hover:text-blend z-50!"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -97,13 +97,13 @@ export default function Navbar() {
               type: "tween",
             }}
             exit={{ opacity: 0, y: "-100%", x: "-20%" }}
-            className="absolute top-0 h-screen w-full bg-slate-950 z-40"
+            className="absolute top-0 h-screen w-full cyber-glass-card rounded-none z-40"
           >
             <div className="size-full flex flex-col gap-2 justify-between items-center">
               <div className="text-white w-full py-7 px-7 font-bold text-xl flex justify-between md:w-[90%]">
                 <div>
                   <a href="/">
-                    Jayasurya<span className="text-pink-600"> M</span>
+                    Jayasurya<span className="text-purple-400"> M</span>
                   </a>
                 </div>
                 <div
@@ -127,8 +127,8 @@ export default function Navbar() {
                           to={link.path}
                           onClick={() => setIsOpen(false)}
                           className={({ isActive }) =>
-                            `text-4xl md:text-6xl leading-9 md:leading-14 hover:shadow-[0_6px_0_0_white] transition-all duration-500 w-fit font-bold ${
-                              isActive ? "text-white" : "text-white hover:" 
+                            `text-4xl md:text-6xl leading-9 md:leading-14 hover:text-purple-300 transition-all duration-500 w-fit font-bold ${
+                              isActive ? "text-purple-500 glow-text-purple" : "text-white/80"
                             }`
                           }
                         >
@@ -136,19 +136,18 @@ export default function Navbar() {
                         </NavLink>
                       ))}
                     </div>
-                    <div className="text-white w-[60%] flex flex-col">
-                      <a href="">Github</a>
-                      <a href="">Linkedin</a>
-                      <a href="">Whatsapp</a>
+                    <div className="text-white/60 w-[60%] flex flex-col gap-2 font-medium">
+                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors w-fit">Github</a>
+                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors w-fit">Linkedin</a>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="w-full flex justify-center">
-                <div className="flex w-[90%] gap-2 py-5 text-white font-bold">
-                  <Phone color="white" />
-                  <a href="tel:+919916446595"> 9916446595</a>
+                <div className="flex w-[90%] gap-2 py-5 text-white/80 font-bold">
+                  <Phone className="text-purple-400" />
+                  <a href="tel:+919916446595" className="hover:text-purple-400 transition-colors"> +91 99164 46595</a>
                 </div>
               </div>
             </div>

@@ -44,7 +44,11 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-24 px-6 lg:px-24 bg-transparent relative z-10 border-t border-white/10 overflow-hidden">
+    <section className="py-24 px-6 lg:px-24 bg-linear-to-b from-[#030712] via-[#090518] to-[#030712] relative z-10 w-full overflow-hidden">
+      {/* Top glowing gradient divider line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-purple-500/25 to-transparent z-10" />
+      {/* Bottom glowing gradient divider line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-fuchsia-500/20 to-transparent z-10" />
       <div className="max-w-7xl mx-auto" ref={containerRef}>
         <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-16 text-center">
           Client Feedback
@@ -54,19 +58,19 @@ export default function Testimonials() {
           {testimonialsData.map((testimonial, index) => (
             <div
               key={index}
-              className="testimonial-card relative p-10 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl hover:border-indigo-400/50 transition-all duration-500 hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] group"
+              className="testimonial-card cyber-glass-card-purple relative p-10 rounded-3xl group"
             >
-              <Quote className="absolute top-8 left-8 w-12 h-12 text-white/10 z-0 group-hover:text-indigo-400/30 transition-colors" />
-              <p className="relative z-10 text-xl md:text-2xl text-indigo-100/90 font-light leading-relaxed mb-8 pt-6">
+              <Quote className="absolute top-8 left-8 w-12 h-12 text-white/5 z-0 group-hover:text-purple-400/20 transition-colors" />
+              <p className="relative z-10 text-xl md:text-2xl text-white/80 font-light leading-relaxed mb-8 pt-6">
                 "{testimonial.quote}"
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-linear-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white font-semibold tracking-wide shadow-md">
+                <div className="w-12 h-12 rounded-full bg-linear-to-br from-purple-600 to-fuchsia-500 flex items-center justify-center text-white font-semibold tracking-wide shadow-[0_0_15px_rgba(168,85,247,0.3)]">
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
                   <h4 className="text-white font-medium">{testimonial.name}</h4>
-                  <span className="text-indigo-300 text-sm">
+                  <span className="text-purple-400 text-sm font-medium">
                     {testimonial.role}
                   </span>
                 </div>

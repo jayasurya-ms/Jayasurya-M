@@ -13,6 +13,73 @@
 body {
   margin: 0;
   padding: 0;
+  background: radial-gradient(ellipse at top, #081125 0%, #030712 70%, #010204 100%);
+  color: #f1f5f9;
+}
+
+/* Cyber Glass Card Style */
+.cyber-glass-card {
+  background: rgba(6, 12, 26, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 
+              inset 0 0 12px rgba(168, 85, 247, 0.05);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-glass-card:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
+              0 0 15px rgba(168, 85, 247, 0.25), 
+              inset 0 0 15px rgba(168, 85, 247, 0.1);
+  background: rgba(6, 12, 26, 0.5);
+}
+
+/* Cyber Glass Card Purple Variant (Backward compatibility / identical) */
+.cyber-glass-card-purple {
+  background: rgba(6, 12, 26, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(168, 85, 247, 0.12);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 
+              inset 0 0 12px rgba(168, 85, 247, 0.05);
+  transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-glass-card-purple:hover {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
+              0 0 15px rgba(168, 85, 247, 0.25), 
+              inset 0 0 15px rgba(168, 85, 247, 0.1);
+  background: rgba(6, 12, 26, 0.5);
+}
+
+/* Cyber Glow Button */
+.cyber-button {
+  position: relative;
+  background: rgba(168, 85, 247, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2),
+              inset 0 0 8px rgba(168, 85, 247, 0.1);
+  color: #ffffff;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+.cyber-button:hover {
+  background: rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4),
+              0 0 25px rgba(99, 102, 241, 0.25),
+              inset 0 0 12px rgba(168, 85, 247, 0.2);
+  border-color: rgba(168, 85, 247, 0.9);
+  transform: scale(1.03);
+}
+
+/* Neon Text Glows */
+.glow-text-purple {
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 
+               0 0 20px rgba(168, 85, 247, 0.1);
 }
 
 /* Base styles for GSAP ScrollTrigger to ensure no horizontal scroll during animations */

@@ -6,8 +6,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProjectCard({ project, index }) {
+export default function ProjectCard({ project, index, lightTheme = false }) {
   const cardRef = useRef(null);
+  const animContainerRef = useRef(null);
+  const photoRef = useRef(null);
   const imageRef = useRef(null);
   const textRef = useRef(null);
 
@@ -15,27 +17,59 @@ export default function ProjectCard({ project, index }) {
 
   useEffect(() => {
     const card = cardRef.current;
-    const image = imageRef.current;
+    const container = animContainerRef.current;
+    const photo = photoRef.current;
     const text = textRef.current;
+    const image = imageRef.current;
 
-    // Card slide-up reveal
-    gsap.fromTo(
-      card,
+    // Set initial hidden state to avoid layout flashes before animation starts
+    gsap.set(container, { opacity: 0, y: 100 });
+    gsap.set([photo, text], { opacity: 0, y: 20 });
+
+    // Timeline for container reveal (animates the whole container wrapper, then staggers its contents)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    tl.fromTo(
+      container,
       { opacity: 0, y: 100 },
       {
         opacity: 1,
         y: 0,
-        duration: 1.2,
+        duration: 1.0,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
-        },
       },
-    );
+    )
+      .fromTo(
+        photo,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.8", // Start photo animation as card begins revealing
+      )
+      .fromTo(
+        text,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        "-=0.79", // Stagger details with exactly 0.01s gap (0.8 - 0.79)
+      );
 
-    // Image Parallax
-    gsap.fromTo(
+    // Image Parallax within the card frame (uses static trigger)
+    const parallax = gsap.fromTo(
       image,
       { y: -30 },
       {
@@ -50,96 +84,90 @@ export default function ProjectCard({ project, index }) {
       },
     );
 
-    // Text Stagger animation
-    const textChildren = text.children;
-    gsap.fromTo(
-      textChildren,
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 75%",
-        },
-      },
-    );
-
     return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === card) t.kill();
-      });
+      if (tl.scrollTrigger) tl.scrollTrigger.kill();
+      tl.kill();
+      if (parallax.scrollTrigger) parallax.scrollTrigger.kill();
+      parallax.kill();
     };
   }, []);
 
   return (
-    <motion.div
-      ref={cardRef}
-      className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 lg:gap-24 items-center group`}
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 200, damping: 20 }}
-    >
-      <div className="flex-1 w-full overflow-hidden rounded-3xl relative aspect-4/3 bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)] group-hover:border-indigo-500/50 group-hover:shadow-[0_8px_40px_rgba(99,102,241,0.2)] transition-all duration-500">
+    <div ref={cardRef} className="w-full">
+      <div ref={animContainerRef} className="w-full opacity-0">
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="w-full h-full"
+          className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 lg:gap-16 items-center group cyber-glass-card p-6 md:p-8 lg:p-12 rounded-[2rem] w-full`}
+          whileHover={{ y: -5 }}
+          transition={{ type: "spring", stiffness: 200, damping: 20 }}
         >
-          <img
-            ref={imageRef}
-            src={project.image_url}
-            alt={project.title}
-            className="w-full h-[120%] object-cover absolute top-[-10%] left-0 opacity-80 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
-          />
+          <div
+            ref={photoRef}
+            className="flex-1 lg:flex-[1] w-full overflow-hidden rounded-2xl relative aspect-4/3"
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="w-full h-full"
+            >
+              <img
+                ref={imageRef}
+                src={project.image_url}
+                alt={project.title}
+                className="w-full h-[120%] object-cover absolute top-[-10%] left-0 opacity-80 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
+              />
+            </motion.div>
+          </div>
+
+          <div
+            ref={textRef}
+            className="flex-1 lg:flex-[2] flex flex-col justify-center"
+          >
+            <span className="text-purple-400 text-sm tracking-widest uppercase mb-4 block font-medium">
+              {project.category}
+            </span>
+            <h3 className="text-3xl md:text-4xl font-semibold tracking-tight text-white mb-6 group-hover:text-purple-300 transition-colors">
+              {project.title}
+            </h3>
+            <p className="text-white/60 text-md font-light leading-relaxed mb-8 max-w-3xl whitespace-pre-line">
+              {project.description}
+            </p>
+
+            <div className="flex flex-wrap gap-3 mb-10">
+              {project.tech_stack.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-4 py-2 bg-purple-950/20 backdrop-blur-sm border border-purple-500/20 rounded-full text-purple-300 text-sm font-medium tracking-wide"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-8">
+              <a
+                href={project.github_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/70 hover:text-purple-300 transition-colors font-medium border-b border-transparent hover:border-purple-300 pb-1"
+              >
+                <Github className="w-5 h-5" />
+                Source
+              </a>
+              {project.live_url && (
+                <a
+                  href={project.live_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-white/70 hover:text-purple-300 transition-colors font-medium border-b border-transparent hover:border-purple-300 pb-1"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                  Live
+                </a>
+              )}
+            </div>
+          </div>
         </motion.div>
       </div>
-
-      <div ref={textRef} className="flex-1 flex flex-col justify-center">
-        <span className="text-indigo-400 text-sm tracking-widest uppercase mb-4 block font-medium">
-          {project.category}
-        </span>
-        <h3 className="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-6 group-hover:text-indigo-400 transition-colors">
-          {project.title}
-        </h3>
-        <p className="text-slate-300 text-lg font-light leading-relaxed mb-8 max-w-xl">
-          {project.description}
-        </p>
-
-        <div className="flex flex-wrap gap-3 mb-10">
-          {project.tech_stack.map((tech, idx) => (
-            <span
-              key={idx}
-              className="px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full text-indigo-200 text-sm font-medium tracking-wide"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-8">
-          <a
-            href={project.github_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-300 hover:text-indigo-400 transition-colors font-medium border-b border-transparent hover:border-indigo-400 pb-1"
-          >
-            <Github className="w-5 h-5" />
-            Source
-          </a>
-          <a
-            href={project.live_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-slate-300 hover:text-indigo-400 transition-colors font-medium border-b border-transparent hover:border-indigo-400 pb-1"
-          >
-            <ExternalLink className="w-5 h-5" />
-            Live
-          </a>
-        </div>
-      </div>
-    </motion.div>
+    </div>
   );
 }

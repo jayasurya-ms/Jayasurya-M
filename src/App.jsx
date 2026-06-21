@@ -16,10 +16,9 @@ function App() {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      duration: 2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.1,
       wheelMultiplier: 0.5,
-      touchMultiplier: 1.5,
+      syncTouch: true,
     });
 
     lenis.on("scroll", ScrollTrigger.update);

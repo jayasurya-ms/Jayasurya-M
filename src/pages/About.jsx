@@ -7,7 +7,7 @@ const aboutData = {
   contact_links: [
     { platform: "GitHub", url: "https://github.com/", icon: "Github" },
     { platform: "LinkedIn", url: "https://linkedin.com/", icon: "Linkedin" },
-    { platform: "Email", url: "mailto:hello@example.com", icon: "Mail" },
+    { platform: "Email", url: "mailto:jayasurya.m9916@gmail.com", icon: "Mail" },
   ],
 };
 
@@ -45,7 +45,7 @@ export default function About() {
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white"
+            className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white glow-text-purple"
           >
             About Me
           </motion.h1>
@@ -53,11 +53,11 @@ export default function About() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-xl text-indigo-100/90 font-light leading-relaxed"
+            className="text-xl text-white/60 font-light leading-relaxed"
           >
             <div className="space-y-6">
               <p>
-                Based in San Francisco, I specialize in architecting complete
+                Based in India, I specialize in architecting complete
                 web applications. From designing normalized database schemas to
                 creating responsive React interfaces, I ensure data flows
                 securely and efficiently.
@@ -69,16 +69,16 @@ export default function About() {
                 in comprehensive testing and well-documented APIs.
               </p>
               <p>
-                When I'm not coding, you can find me automating personal
-                workflows, contributing to open-source Python libraries, or
-                trying to perfect my pour-over coffee recipe.
+                When I'm not coding, you can find me automating workflows,
+                contributing to open-source project tools, or learning new
+                technologies to stay at the cutting edge.
               </p>
             </div>
           </motion.div>
         </div>
 
         <div className="flex-1 flex flex-col justify-center">
-          <h3 className="text-lg text-indigo-400 mb-6 uppercase tracking-wider font-medium">
+          <h3 className="text-lg text-purple-400 mb-6 uppercase tracking-wider font-medium">
             Connect
           </h3>
           <motion.div
@@ -96,11 +96,11 @@ export default function About() {
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={itemVars}
-                  whileHover={{ x: 10, color: "#ffffff" }}
-                  className="flex items-center gap-4 text-xl text-indigo-200/80 hover:text-white transition-colors py-2 group"
+                  whileHover={{ x: 10, color: "#a855f7" }}
+                  className="flex items-center gap-4 text-xl text-white/60 hover:text-purple-300 transition-colors py-2 group"
                 >
                   {IconComponent && (
-                    <IconComponent className="w-6 h-6 group-hover:text-indigo-400 transition-colors" />
+                    <IconComponent className="w-6 h-6 group-hover:text-purple-400 transition-colors" />
                   )}
                   <span>{link.platform}</span>
                 </motion.a>
