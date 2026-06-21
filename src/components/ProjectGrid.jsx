@@ -77,7 +77,7 @@ export default function ProjectGrid({
   return (
     <section
       ref={sectionRef}
-      className={`py-12 md:py-32 px-6 lg:px-24 relative z-10 w-full overflow-hidden transition-colors duration-500 ${
+      className={`py-12 md:py-20 px-6 lg:px-24 relative z-10 w-full overflow-hidden transition-colors duration-500 ${
         lightTheme
           ? "bg-linear-to-b from-[#09041a] via-[#150a2e] to-[#0c061e] border-t border-b border-white/5"
           : "bg-transparent"
@@ -97,7 +97,7 @@ export default function ProjectGrid({
       <div className="max-w-7xl mx-auto relative z-10">
         <h2
           ref={headingRef}
-          className="text-4xl md:text-6xl font-semibold tracking-tight mb-24 text-white"
+          className="text-4xl md:text-6xl font-semibold tracking-tight mb-10 md:mb-20 text-white"
         >
           Selected Works
         </h2>
@@ -114,7 +114,7 @@ export default function ProjectGrid({
         </div>
 
         {showViewAll && (
-          <div ref={buttonRef} className="mt-32 flex justify-center">
+          <div ref={buttonRef} className="mt-15 flex justify-center">
             <Link
               to="/projects"
               className="cyber-button group inline-flex items-center gap-3 px-8 py-4 rounded-full font-medium tracking-wide transition-all duration-300"

@@ -28,6 +28,11 @@ const skillsData = [
     level: 95,
   },
   {
+    name: "Core Java",
+    icon: <FaJava className="text-[#e76f00]" />,
+    level: 85,
+  },
+  {
     name: "Bootstrap",
     icon: <FaBootstrap className="text-[#7952B3]" />,
     level: 85,
@@ -45,11 +50,6 @@ const skillsData = [
     name: "SQL",
     icon: <FaDatabase className="text-[#00758f]" />,
     level: 75,
-  },
-  {
-    name: "Core Java",
-    icon: <FaJava className="text-[#e76f00]" />,
-    level: 85,
   },
 ];
 

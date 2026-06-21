@@ -17,11 +17,21 @@ body {
   color: #f1f5f9;
 }
 
+/* GPU Acceleration for smooth, flicker-free animations on mobile */
+.cyber-glass-card,
+.cyber-glass-card-purple,
+.service-card,
+.exp-block,
+.skill-card {
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 /* Cyber Glass Card Style */
 .cyber-glass-card {
-  background: rgba(6, 12, 26, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 12, 26, 0.88);
   border: 1px solid rgba(168, 85, 247, 0.12);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 
               inset 0 0 12px rgba(168, 85, 247, 0.05);
@@ -33,14 +43,12 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
               0 0 15px rgba(168, 85, 247, 0.25), 
               inset 0 0 15px rgba(168, 85, 247, 0.1);
-  background: rgba(6, 12, 26, 0.5);
+  background: rgba(6, 12, 26, 0.92);
 }
 
 /* Cyber Glass Card Purple Variant (Backward compatibility / identical) */
 .cyber-glass-card-purple {
-  background: rgba(6, 12, 26, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 12, 26, 0.88);
   border: 1px solid rgba(168, 85, 247, 0.12);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 
               inset 0 0 12px rgba(168, 85, 247, 0.05);
@@ -52,7 +60,26 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5),
               0 0 15px rgba(168, 85, 247, 0.25), 
               inset 0 0 15px rgba(168, 85, 247, 0.1);
-  background: rgba(6, 12, 26, 0.5);
+  background: rgba(6, 12, 26, 0.92);
+}
+
+@media (min-width: 1024px) {
+  .cyber-glass-card {
+    background: rgba(6, 12, 26, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .cyber-glass-card:hover {
+    background: rgba(6, 12, 26, 0.5);
+  }
+  .cyber-glass-card-purple {
+    background: rgba(6, 12, 26, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .cyber-glass-card-purple:hover {
+    background: rgba(6, 12, 26, 0.5);
+  }
 }
 
 /* Cyber Glow Button */

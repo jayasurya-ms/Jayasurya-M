@@ -16,20 +16,28 @@ function App() {
     gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis({
-      lerp: 0.1,
-      wheelMultiplier: 0.5,
-      syncTouch: true,
+      duration: 1.8, // Slower scroll duration for luxurious, controlled scroll tail
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth deceleration profile
+      lerp: 0.05, // Slower lerp for a very fluid, buttery feeling
+      wheelMultiplier: 0.7, // Slower scroll speed for mouse wheels
+      touchMultiplier: 1.2, // Controlled scroll speed for mobile touch
+      syncTouch: true, // Smooth touch events on mobile
+      syncTouchLerp: 0.05, // Slow touch smoothing to match desktop feel and prevent quick jittering
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const tick = (time) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
-    return () => lenis.destroy();
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(tick);
+    };
   }, []);
   return (
     <BrowserRouter>

@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { Github, Twitter, Linkedin, Mail, ArrowRight } from "lucide-react";
+import {
+  Github,
+  Twitter,
+  Linkedin,
+  Mail,
+  ArrowRight,
+  Instagram,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 export default function Footer() {
@@ -12,7 +19,8 @@ export default function Footer() {
         {/* Brand & Bio */}
         <div className="flex-1 w-full max-w-sm">
           <span className="text-white font-bold tracking-tighter text-3xl mb-6 block">
-            Jayasurya<span className="text-purple-400 glow-text-purple"> M</span>
+            Jayasurya
+            <span className="text-purple-400 glow-text-purple"> M</span>
           </span>
           <p className="text-white/60 text-lg font-light leading-relaxed mb-8">
             A specialized fullstack developer crafting elite, high-performance
@@ -31,7 +39,7 @@ export default function Footer() {
         <div className="flex-1 flex gap-16">
           <div className="flex flex-col gap-4">
             <h4 className="text-white font-semibold tracking-wider uppercase text-sm mb-4">
-              Nav
+              Quick Links
             </h4>
             {["Home", "Projects", "About", "Contact"].map((item) => (
               <NavLink
@@ -46,12 +54,12 @@ export default function Footer() {
 
           <div className="flex flex-col gap-4">
             <h4 className="text-white font-semibold tracking-wider uppercase text-sm mb-4">
-              Social
+              Social Medias
             </h4>
             {[
               { name: "GitHub", href: "https://github.com" },
               { name: "LinkedIn", href: "https://linkedin.com" },
-              { name: "Twitter", href: "https://twitter.com" },
+              { name: "Instagram", href: "https://instagram.com" },
             ].map((social, idx) => (
               <a
                 key={idx}
@@ -109,9 +117,15 @@ export default function Footer() {
         </div>
         <div className="flex items-center gap-6">
           {[
-            { icon: Github, href: "https://github.com" },
-            { icon: Linkedin, href: "https://linkedin.com" },
-            { icon: Twitter, href: "https://twitter.com" },
+            { icon: Github, href: "https://github.com/jayasurya-ms" },
+            {
+              icon: Linkedin,
+              href: "https://www.linkedin.com/in/jayasurya-ms",
+            },
+            {
+              icon: Instagram,
+              href: "https://www.instagram.com/am_midnyt_rider_47?igsh=MWxydnBrZmo4czlwYw==",
+            },
           ].map((social, idx) => {
             const Icon = social.icon;
             return (

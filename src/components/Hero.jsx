@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bgimgw from "../assets/banner2.png";
+import bgimgw from "../assets/bannerw.png";
 import bgimgm from "../assets/bannerm.png";
 
 // Embedded data to replace data.json
@@ -239,7 +239,7 @@ export default function Hero() {
             <h2 className="text-2xl md:text-5xl ms-6 text-white font-bold">
               Hii, I'm
             </h2>
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white flex flex-wrap drop-shadow-lg glow-text-purple">
+            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-white flex flex-wrap drop-shadow-lg glow-text-purple">
               {titleText.split("").map((char, index) => (
                 <span
                   key={char + "-" + index}
@@ -249,7 +249,7 @@ export default function Hero() {
                 </span>
               ))}
             </h1>
-            <h2 className="text-2xl md:text-4xl text-white tracking-wide font-light flex flex-wrap drop-shadow-md">
+            <h2 className="text-2xl md:text-4xl text-white tracking-wide font-semibold md:font-bold flex flex-wrap drop-shadow-md">
               {subtitleText.split(" ").map((word, index) => (
                 <span
                   key={word + "-" + index}
@@ -260,7 +260,7 @@ export default function Hero() {
               ))}
             </h2>
 
-            <p className="bio-text mt-6 text-lg md:text-xl text-slate-200 max-w-2xl font-light">
+            <p className="bio-text mt-6 text-lg md:text-xl text-slate-200 max-w-2xl font-semibold md:font-bold">
               {heroData.bio}
             </p>
 

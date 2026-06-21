@@ -60,14 +60,15 @@ export default function Experience() {
       );
     }
 
-    // 2. Reveal each experience card as it scrolls into view
+    // 2. Reveal each experience card as it scrolls into view (responsive start and offsets)
     const blocks = containerRef.current.querySelectorAll(".exp-block");
     const cardTriggers = [];
+    const isMobile = window.innerWidth < 1024;
 
     blocks.forEach((block) => {
       const cardAnim = gsap.fromTo(
         block,
-        { opacity: 0, x: 50, scale: 0.95 },
+        { opacity: 0, x: isMobile ? 20 : 50, scale: 0.95 },
         {
           opacity: 1,
           x: 0,
@@ -76,7 +77,7 @@ export default function Experience() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: block,
-            start: "top 50%",
+            start: isMobile ? "top 80%" : "top 75%",
             toggleActions: "play reverse play reverse",
           },
         },
@@ -104,7 +105,7 @@ export default function Experience() {
   return (
     <section
       ref={sectionRef}
-      className="py-24 px-6 lg:px-24 bg-linear-to-b from-[#030712] via-[#050615] to-[#030712] relative z-10 w-full overflow-hidden"
+      className="py-15 md:py-24 px-8 lg:px-24 bg-linear-to-b from-[#030712] via-[#050615] to-[#030712] relative z-10 w-full overflow-hidden"
     >
       {/* Top glowing gradient divider line */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-purple-500/30 to-transparent z-10" />
@@ -115,13 +116,13 @@ export default function Experience() {
           {/* Sticky Left Column */}
           <div className="lg:w-1/3 relative">
             <div className="sticky top-32">
-              <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-6">
+              <h2 className="text-3xl md:text-6xl font-semibold tracking-tight text-white mb-6">
                 Professional <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-fuchsia-500 glow-text-purple">
                   Journey
                 </span>
               </h2>
-              <p className="text-xl text-white/60 font-light max-w-sm">
+              <p className="text-md md:text-xl text-white/60 font-light max-w-sm">
                 A timeline of impactful engineering roles, architecting
                 fullstack systems and crafting robust digital solutions.
               </p>
@@ -145,10 +146,10 @@ export default function Experience() {
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                   <div>
-                    <h3 className="text-3xl font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">
+                    <h3 className="text-xl md:text-3xl font-bold text-white mb-1 group-hover:text-purple-300 transition-colors">
                       {exp.role}
                     </h3>
-                    <h4 className="text-xl text-purple-400/80 font-medium">
+                    <h4 className="text-lg md:text-xl text-purple-400/80 font-medium">
                       {exp.company}
                     </h4>
                   </div>
@@ -157,7 +158,7 @@ export default function Experience() {
                   </div>
                 </div>
 
-                <p className="relative z-10 text-white/70 font-light text-md leading-relaxed max-w-2xl">
+                <p className="text-[12px] md:text-md relative z-10 text-white/70 font-light  leading-relaxed max-w-2xl">
                   {exp.description}
                 </p>
               </div>

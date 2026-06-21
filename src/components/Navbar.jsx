@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-500 bg-transparent ${isScrolled ? "py-4" : "py-0"}`}
+      className={`fixed w-full z-50 transition-all duration-500 bg-transparent ${isOpen ? "h-screen" : "h-auto"} ${isScrolled ? "py-4" : "py-0"}`}
     >
       <div className="w-full px-6 lg:px-24">
         <div
@@ -99,7 +99,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: "-100%", x: "-20%" }}
             className="absolute top-0 h-screen w-full cyber-glass-card rounded-none z-40"
           >
-            <div className="size-full flex flex-col gap-2 justify-between items-center">
+            <div className="size-full flex flex-col gap-2 justify-between items-center bg-gray-950">
               <div className="text-white w-full py-7 px-7 font-bold text-xl flex justify-between md:w-[90%]">
                 <div>
                   <a href="/">
@@ -128,7 +128,9 @@ export default function Navbar() {
                           onClick={() => setIsOpen(false)}
                           className={({ isActive }) =>
                             `text-4xl md:text-6xl leading-9 md:leading-14 hover:text-purple-300 transition-all duration-500 w-fit font-bold ${
-                              isActive ? "text-purple-500 glow-text-purple" : "text-white/80"
+                              isActive
+                                ? "text-purple-500 glow-text-purple"
+                                : "text-white/80"
                             }`
                           }
                         >
@@ -137,8 +139,22 @@ export default function Navbar() {
                       ))}
                     </div>
                     <div className="text-white/60 w-[60%] flex flex-col gap-2 font-medium">
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors w-fit">Github</a>
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-purple-300 transition-colors w-fit">Linkedin</a>
+                      <a
+                        href="https://github.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-300 transition-colors w-fit"
+                      >
+                        Github
+                      </a>
+                      <a
+                        href="https://linkedin.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-purple-300 transition-colors w-fit"
+                      >
+                        Linkedin
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -147,7 +163,13 @@ export default function Navbar() {
               <div className="w-full flex justify-center">
                 <div className="flex w-[90%] gap-2 py-5 text-white/80 font-bold">
                   <Phone className="text-purple-400" />
-                  <a href="tel:+919916446595" className="hover:text-purple-400 transition-colors"> +91 99164 46595</a>
+                  <a
+                    href="tel:+919916446595"
+                    className="hover:text-purple-400 transition-colors"
+                  >
+                    {" "}
+                    +91 99164 46595
+                  </a>
                 </div>
               </div>
             </div>

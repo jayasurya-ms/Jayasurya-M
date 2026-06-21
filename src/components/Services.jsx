@@ -71,29 +71,68 @@ export default function Services() {
 
   useEffect(() => {
     const cards = containerRef.current.querySelectorAll(".service-card");
+    let mm = gsap.matchMedia();
 
-    const anim = gsap.fromTo(
-      cards,
+    mm.add(
       {
-        opacity: 0,
-        scale: 0,
-        rotation: -180,
-        transformOrigin: "center center",
+        isDesktop: "(min-width: 1024px)",
+        isMobile: "(max-width: 1023px)",
       },
-      {
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 1.2,
-        ease: "back.out(1.4)",
-        stagger: 0.5,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 30%",
-          end: "bottom 40%",
-          toggleActions: "play reverse play reverse",
-        },
-      },
+      (context) => {
+        const { isDesktop } = context.conditions;
+
+        if (isDesktop) {
+          // Advanced rotation reveal for high-end desktop viewports
+          gsap.fromTo(
+            cards,
+            {
+              opacity: 0,
+              scale: 0,
+              rotation: -180,
+              transformOrigin: "center center",
+            },
+            {
+              opacity: 1,
+              scale: 1,
+              rotation: 0,
+              duration: 1.2,
+              ease: "back.out(1.4)",
+              stagger: 0.4,
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 75%",
+                end: "bottom 40%",
+                toggleActions: "play reverse play reverse",
+              },
+            }
+          );
+        } else {
+          // Mobile: Reveal each card individually with rotation and scaling as it enters the viewport
+          cards.forEach((card) => {
+            gsap.fromTo(
+              card,
+              {
+                opacity: 0,
+                scale: 0,
+                rotation: -180,
+                transformOrigin: "center center",
+              },
+              {
+                opacity: 1,
+                scale: 1,
+                rotation: 0,
+                duration: 1.2,
+                ease: "back.out(1.4)",
+                scrollTrigger: {
+                  trigger: card,
+                  start: "top 85%",
+                  toggleActions: "play reverse play reverse",
+                },
+              }
+            );
+          });
+        }
+      }
     );
 
     // Delayed refresh to ensure React layout shifts and dynamic height is fully settled
@@ -103,12 +142,11 @@ export default function Services() {
 
     return () => {
       clearTimeout(timer);
-      if (anim.scrollTrigger) anim.scrollTrigger.kill();
-      anim.kill();
+      mm.revert();
     };
   }, []);
   return (
-    <section ref={sectionRef} className="py-24 px-6 lg:px-24 bg-linear-to-b from-[#09041a] via-[#150a2e] to-[#0c061e] relative z-10 w-full overflow-hidden">
+    <section ref={sectionRef} className="py-10 md:py-20 px-6 lg:px-24 bg-linear-to-b from-[#09041a] via-[#150a2e] to-[#0c061e] relative z-10 w-full overflow-hidden">
       {/* Top glowing gradient divider line */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-fuchsia-500/30 to-transparent z-10" />
       {/* Bottom glowing gradient divider line */}
@@ -120,16 +158,16 @@ export default function Services() {
 
       <div className="max-w-7xl mx-auto relative z-10" ref={containerRef}>
         <div className="mb-10 md:mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-6">
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-white mb-6">
             What I Do
           </h2>
-          <p className="text-xl text-white/60 font-light max-w-2xl">
+          <p className="text-md md:text-xl text-white/60 font-light max-w-2xl">
             Specialized skillsets focused on delivering high-end,
             production ready digital solutions from concept to deployment.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-15 w-full px-6 md:px-2">
           {servicesData.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -143,26 +181,26 @@ export default function Services() {
                       <Icon className="w-6 h-6" />
                     </div>
                     <div className="flex flex-col -mt-4">
-                      <h3 className="text-2xl font-bold text-white mb-1">
+                      <h3 className="text-md md:text-2xl font-bold text-white mb-1">
                         {service.title}
                       </h3>
-                      <span className="text-purple-400 text-sm font-medium tracking-wide block mb-4">
+                      <span className="text-purple-400 text-[13px] md:text-sm font-medium tracking-wide block mb-4">
                         {service.subtitle}
                       </span>
                     </div>
                   </div>
-                  <p className="text-white/60 leading-relaxed font-light text-sm">
+                  <p className="text-white/60 leading-relaxed font-light text-[12px] md:text-sm">
                     {service.description}
                   </p>
                 </div>
 
                 <div className="mt-6 pt-6 border-t border-white/5 flex flex-col gap-3">
-                  <h4 className="text-purple-400 text-xs font-semibold uppercase tracking-wider">
+                  <h4 className="text-purple-400 text-[13px] md:text-xs font-semibold uppercase tracking-wider">
                     Technical Skills
                   </h4>
                   <div className="flex flex-col gap-2.5">
                     {service.skills.map((skillGroup, gIdx) => (
-                      <div key={gIdx} className="text-xs">
+                      <div key={gIdx} className="text-[12px] md:text-xs">
                         <span className="text-purple-300 font-semibold mr-1.5">
                           {skillGroup.category}:
                         </span>
