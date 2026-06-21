@@ -56,7 +56,6 @@ const skillsData = [
 export default function Skills() {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
-  const cardsRef = useRef([]);
 
   useEffect(() => {
     console.log(
