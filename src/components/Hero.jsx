@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bgimg from "../assets/banner.jpg";
+import bgimgw from "../assets/banner2.png";
+import bgimgm from "../assets/bannerm.png";
 
 // Embedded data to replace data.json
 const heroData = {
@@ -186,8 +187,8 @@ export default function Hero() {
       <section className="hidden md:flex relative h-300 w-full flex-col items-center justify-center overflow-hidden px-6 lg:px-24 z-10">
         <div
           ref={bgrefWeb}
-          className="absolute z-0 size-full bg-cover bg-position-[top_10%_right_25%] xl:bg-position-[top_10%_right_30%]"
-          style={{ backgroundImage: `url(${bgimg})` }}
+          className="absolute z-0 size-full bg-cover bg-position-[bottom_30%_right_50%]"
+          style={{ backgroundImage: `url(${bgimgw})` }}
         ></div>
 
         <div className="z-10! w-full max-w-7xl pt-24 pb-12 flex flex-col justify-center min-h-[80vh]">
@@ -230,7 +231,7 @@ export default function Hero() {
         <div
           ref={bgrefMob}
           className="absolute z-0 size-full bg-cover bg-position-[top_10%_right_20%]"
-          style={{ backgroundImage: `url(${bgimg})` }}
+          style={{ backgroundImage: `url(${bgimgm})` }}
         ></div>
 
         <div className="z-10! w-full max-w-7xl pt-24 pb-12 flex flex-col justify-center min-h-[80vh]">
