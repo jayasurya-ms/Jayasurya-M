@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
+import profile from "../assets/profile.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -97,9 +98,9 @@ export default function Navbar() {
               type: "tween",
             }}
             exit={{ opacity: 0, y: "-100%", x: "-20%" }}
-            className="absolute top-0 h-screen w-full cyber-glass-card rounded-none z-40"
+            className="absolute top-0 h-screen w-full cyber-glass-card rounded-none z-40 overflow-y-auto"
           >
-            <div className="size-full flex flex-col gap-2 justify-between items-center bg-gray-950">
+            <div className="min-h-full w-full flex flex-col justify-between items-center bg-gray-950 pb-8">
               <div className="text-white w-full py-7 px-7 font-bold text-xl flex justify-between md:w-[90%]">
                 <div>
                   <a href="/">
@@ -127,7 +128,9 @@ export default function Navbar() {
               <div className="w-full flex justify-center">
                 <div className="w-[90%] flex">
                   <div className="w-[50%] justify-center items-center hidden md:flex">
-                    <div className="bg-white w-[60%] h-110"></div>
+                    <div className="bg-white w-[60%] h-110">
+                      <img src={profile} alt="profile" className="size-full!" />
+                    </div>
                   </div>
                   <div className="w-full md:w-[50%] flex flex-col gap-10 justify-center items-center">
                     <div className="flex flex-col gap-2 w-[60%]">
