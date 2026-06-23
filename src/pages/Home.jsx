@@ -5,6 +5,9 @@ import Services from "../components/Services";
 import Experience from "../components/Experience";
 import Testimonials from "../components/Testimonials";
 import CallToAction from "../components/CallToAction";
+import p1image from "../assets/3cbs.png";
+import p2image from "../assets/square.png";
+import p4image from "../assets/ds.png";
 
 // Embedded Projects data for Home Page (Top 3 projects)
 const featuredProjects = [
@@ -22,10 +25,10 @@ const featuredProjects = [
       "react-router-dom",
       "Axios",
     ],
-    image_url:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1600&auto=format&fit=crop",
-    github_url: "https://github.com/",
-    live_url: "",
+    image_url: p1image,
+    github_url:
+      "https://github.com/jayasurya-ms/3Concepts-Building-Solutions-crm",
+    live_url: "https://3concepts.in/",
   },
   {
     id: "p2",
@@ -41,22 +44,20 @@ const featuredProjects = [
       "react-router-dom",
       "react-helmet",
     ],
-    image_url:
-      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1600&auto=format&fit=crop",
-    github_url: "https://github.com/",
+    image_url: p2image,
+    github_url: "https://github.com/jayasurya-ms/Square-M-Reality",
     live_url: "https://squaremrealty.com",
   },
   {
     id: "p3",
-    title: "Fortune Trading Academy",
-    category: "Merida Tech Minds Company Website • Feb 2026",
+    title: "DS Preschool",
+    category: "Societal Project • April 2025",
     description:
-      "Focused on studying the existing codebase to identify, debug, and resolve layout bugs while enhancing SEO performance.\n\nKey Achievement: Gained knowledge about global context, codebase debugging, and successfully optimized SEO metadata (sitemap.xml, custom tags, schema.org configuration).",
-    tech_stack: ["React.js", "HTML", "CSS", "Tailwind CSS"],
-    image_url:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1600&auto=format&fit=crop",
-    github_url: "https://github.com/",
-    live_url: "https://fortunetradingacademy.com",
+      "Created an interactive preschool website to improve outreach and parent engagement.\n\nKey Achievement: Successfully deployed the platform with a responsive and user-friendly interface at dspreschool.netlify.app.",
+    tech_stack: ["React.js", "HTML", "CSS", "Bootstrap"],
+    image_url: p4image,
+    github_url: "https://github.com/jayasurya-ms/D.S-Preschool",
+    live_url: "https://dspreschool.netlify.app",
   },
 ];
 

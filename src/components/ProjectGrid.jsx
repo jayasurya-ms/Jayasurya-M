@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 // This allows the page components to provide the data natively.
 export default function ProjectGrid({
+  title = "Selected Works",
   projects = [],
   showViewAll = false,
   lightTheme = false,
@@ -99,7 +100,7 @@ export default function ProjectGrid({
           ref={headingRef}
           className="text-4xl md:text-6xl font-semibold tracking-tight mb-10 md:mb-20 text-white"
         >
-          Selected Works
+          {title}
         </h2>
 
         <div className="flex flex-col gap-12 md:gap-16">

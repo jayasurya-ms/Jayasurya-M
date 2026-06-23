@@ -10,7 +10,6 @@ export default function ProjectCard({ project, index, lightTheme = false }) {
   const cardRef = useRef(null);
   const animContainerRef = useRef(null);
   const photoRef = useRef(null);
-  const imageRef = useRef(null);
   const textRef = useRef(null);
 
   const isEven = index % 2 === 0;
@@ -20,7 +19,6 @@ export default function ProjectCard({ project, index, lightTheme = false }) {
     const container = animContainerRef.current;
     const photo = photoRef.current;
     const text = textRef.current;
-    const image = imageRef.current;
 
     // Set initial hidden state to avoid layout flashes before animation starts
     gsap.set(container, { opacity: 0, y: 100 });
@@ -68,32 +66,9 @@ export default function ProjectCard({ project, index, lightTheme = false }) {
         "-=0.79", // Stagger details with exactly 0.01s gap (0.8 - 0.79)
       );
 
-    // Image Parallax within the card frame (uses static trigger, active on desktop only for mobile scroll optimization)
-    let parallax = null;
-    if (window.innerWidth >= 1024) {
-      parallax = gsap.fromTo(
-        image,
-        { y: -30 },
-        {
-          y: 30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-    }
-
     return () => {
       if (tl.scrollTrigger) tl.scrollTrigger.kill();
       tl.kill();
-      if (parallax) {
-        if (parallax.scrollTrigger) parallax.scrollTrigger.kill();
-        parallax.kill();
-      }
     };
   }, []);
 
@@ -107,18 +82,17 @@ export default function ProjectCard({ project, index, lightTheme = false }) {
         >
           <div
             ref={photoRef}
-            className="flex-1 lg:flex-1 w-full overflow-hidden rounded-2xl relative aspect-4/3"
+            className="flex-1 lg:flex-1 w-full overflow-hidden rounded-2xl relative aspect-4/3 bg-[#0d0720]/80 border border-purple-500/10 flex items-center justify-center"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="w-full h-full"
+              className="w-full h-full flex items-center justify-center p-2"
             >
               <img
-                ref={imageRef}
                 src={project.image_url}
                 alt={project.title}
-                className="w-full h-full object-cover absolute top-[-10%] left-0 opacity-80 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
+                className="max-w-full max-h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity group-hover:mix-blend-normal rounded-lg"
               />
             </motion.div>
           </div>

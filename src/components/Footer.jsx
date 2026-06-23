@@ -57,9 +57,15 @@ export default function Footer() {
               Social Medias
             </h4>
             {[
-              { name: "GitHub", href: "https://github.com" },
-              { name: "LinkedIn", href: "https://linkedin.com" },
-              { name: "Instagram", href: "https://instagram.com" },
+              { name: "GitHub", href: "https://github.com/jayasurya-ms" },
+              {
+                name: "LinkedIn",
+                href: "https://www.linkedin.com/in/jayasurya-ms",
+              },
+              {
+                name: "Instagram",
+                href: "https://www.instagram.com/am_midnyt_rider_47?igsh=MWxydnBrZmo4czlwYw==",
+              },
             ].map((social, idx) => (
               <a
                 key={idx}

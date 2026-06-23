@@ -1,114 +1,183 @@
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { GraduationCap, MapPin, Code2 } from "lucide-react";
 
-// Embedded About data replacing data.json
+gsap.registerPlugin(ScrollTrigger);
+
+// Embedded About data
 const aboutData = {
-  bio: "I am a Fullstack Developer specializing in React and Python. I build scalable backends, reliable data pipelines, and responsive frontend interfaces. My focus is on writing clean, maintainable code that solves real-world business challenges.",
-  contact_links: [
-    { platform: "GitHub", url: "https://github.com/", icon: "Github" },
-    { platform: "LinkedIn", url: "https://linkedin.com/", icon: "Linkedin" },
-    { platform: "Email", url: "mailto:jayasurya.m9916@gmail.com", icon: "Mail" },
+  bio: "Full Stack Developer with 6 months of hands-on experience building responsive and dynamic web applications using React.js and Python. Experienced in working with industry-standard practices, including API integration, CRM development, and dashboard interfaces. Passionate about developing efficient, scalable, and user-friendly solutions to solve real-world problems.",
+  philosophy:
+    "Based in Bengaluru, I specialize in complete web applications - from designing to building responsive React interfaces, ensuring data flows securely and efficiently.",
+  education: [
+    {
+      degree: "Master of Computer Applications",
+      institution: "RV Institute of Technology",
+      location: "Bengaluru, India",
+      duration: "2024 – 2025",
+      cgpa: "8.72",
+    },
+    {
+      degree: "Bachelor of Computer Applications",
+      institution: "Community Institute of Management",
+      location: "India",
+      duration: "2020 – 2023",
+      cgpa: "8.75",
+    },
   ],
 };
 
-const iconMap = {
-  Github: Github,
-  Linkedin: Linkedin,
-  Mail: Mail,
-};
-
-const containerVars = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVars = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 100 },
-  },
-};
-
 export default function About() {
+  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const bentoItems = containerRef.current.querySelectorAll(".bento-item");
+
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 320px)", () => {
+      gsap.fromTo(
+        bentoItems,
+        {
+          opacity: 0,
+          y: 40,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play reverse play reverse",
+          },
+        },
+      );
+    });
+
+    // Refresh ScrollTrigger after component mounts
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      mm.revert();
+    };
+  }, []);
+
   return (
-    <div className="pt-24 min-h-screen bg-transparent px-6 lg:px-24">
-      <div className="max-w-7xl mx-auto py-12 md:py-24 flex flex-col md:flex-row gap-12 md:gap-24 relative z-10">
-        <div className="flex-1">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-semibold tracking-tight mb-8 text-white glow-text-purple"
-          >
+    <section
+      ref={sectionRef}
+      className="py-20 md:py-32 px-6 lg:px-24 bg-linear-to-b from-[#09041a] via-[#150a2e] to-[#0c061e] relative z-10 w-full overflow-hidden min-h-screen flex items-center"
+    >
+      {/* Top glowing gradient divider line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-fuchsia-500/30 to-transparent z-10" />
+      {/* Bottom glowing gradient divider line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-linear-to-r from-transparent via-purple-500/25 to-transparent z-10" />
+
+      {/* Decorative ambient glow orbs */}
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-purple-500/15 rounded-full blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-[120px] pointer-events-none z-0" />
+
+      <div
+        className="max-w-7xl mx-auto relative z-10 w-full"
+        ref={containerRef}
+      >
+        <div className="mb-12">
+          <h2 className="text-2xl md:text-5xl font-semibold tracking-tight text-white mb-4">
             About Me
-          </motion.h1>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-xl text-white/60 font-light leading-relaxed"
-          >
-            <div className="space-y-6">
-              <p>
-                Based in India, I specialize in architecting complete
-                web applications. From designing normalized database schemas to
-                creating responsive React interfaces, I ensure data flows
-                securely and efficiently.
-              </p>
-              <p>
-                With deep expertise in Python frameworks like Django and
-                FastAPI, combined with a strong command of React and state
-                management, I approach problem-solving systematically. I believe
-                in comprehensive testing and well-documented APIs.
-              </p>
-              <p>
-                When I'm not coding, you can find me automating workflows,
-                contributing to open-source project tools, or learning new
-                technologies to stay at the cutting edge.
-              </p>
-            </div>
-          </motion.div>
+          </h2>
+          <p className="text-md md:text-xl text-white/60 font-light max-w-2xl">
+            Building digital experiences with a focus on scalable architecture
+            and engaging user interfaces.
+          </p>
         </div>
 
-        <div className="flex-1 flex flex-col justify-center">
-          <h3 className="text-lg text-purple-400 mb-6 uppercase tracking-wider font-medium">
-            Connect
-          </h3>
-          <motion.div
-            variants={containerVars}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-col gap-4"
-          >
-            {aboutData.contact_links.map((link, idx) => {
-              const IconComponent = iconMap[link.icon];
-              return (
-                <motion.a
+        {/* 2-Column Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+          {/* CONTAINER 1: Description (Bio, Philosophy, Hobbies) */}
+          <div className="bento-item cyber-glass-card bg-white/[0.02] border border-white/5 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col group hover:border-purple-500/30 transition-colors duration-500">
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-purple-500/10 border border-purple-400/30 rounded-xl flex items-center justify-center text-purple-300 group-hover:scale-110 transition-transform duration-500 shadow-[inset_0_0_8px_rgba(168,85,247,0.1)]">
+                <Code2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-white">The Developer</h3>
+            </div>
+
+            {/* Content */}
+            <div className="flex flex-col gap-6 flex-1">
+              <p className="text-white/70 leading-relaxed font-light text-sm md:text-base">
+                {aboutData.bio}
+              </p>
+
+              <div className="flex gap-4 p-5 bg-white/[0.02] border border-white/5 rounded-2xl">
+                <MapPin className="w-6 h-6 text-fuchsia-400 shrink-0" />
+                <p className="text-white/60 leading-relaxed font-light text-[12px] md:text-sm">
+                  {aboutData.philosophy}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CONTAINER 2: Education */}
+          <div className="bento-item cyber-glass-card bg-white/[0.02] border border-white/5 backdrop-blur-md rounded-3xl p-8 flex flex-col group hover:border-purple-500/30 transition-colors duration-500">
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 bg-purple-500/10 border border-purple-400/30 rounded-xl flex items-center justify-center text-purple-300 group-hover:scale-110 transition-transform duration-500 shadow-[inset_0_0_8px_rgba(168,85,247,0.1)]">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold text-white">Education</h3>
+            </div>
+
+            {/* Content */}
+            <div className="flex flex-col gap-6">
+              {aboutData.education.map((edu, idx) => (
+                <div
                   key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  variants={itemVars}
-                  whileHover={{ x: 10, color: "#a855f7" }}
-                  className="flex items-center gap-4 text-xl text-white/60 hover:text-purple-300 transition-colors py-2 group"
+                  className={`flex flex-col gap-4 ${
+                    idx !== aboutData.education.length - 1
+                      ? "pb-6 border-b border-white/5"
+                      : ""
+                  }`}
                 >
-                  {IconComponent && (
-                    <IconComponent className="w-6 h-6 group-hover:text-purple-400 transition-colors" />
-                  )}
-                  <span>{link.platform}</span>
-                </motion.a>
-              );
-            })}
-          </motion.div>
+                  <div className="flex flex-col md:flex-row justify-between md:items-center gap-2">
+                    <h4 className="text-[18px] md:text-lg font-bold text-white group-hover:text-purple-200 transition-colors">
+                      {edu.degree}
+                    </h4>
+                    <span className="w-fit px-3 py-1 bg-white/[0.05] rounded-full text-white/60 text-[10px] md:text-xs border border-white/10 tracking-wide">
+                      {edu.duration}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col md:flex-row justify-between gap-4">
+                    <p className="text-white/50 text-sm flex-1">
+                      {edu.institution} <br className="hidden md:block" />
+                      <span className="text-white/40">{edu.location}</span>
+                    </p>
+
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-white/40 text-xs uppercase tracking-wider">
+                        CGPA
+                      </span>
+                      <span className="text-purple-400 text-lg font-semibold">
+                        {edu.cgpa}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
