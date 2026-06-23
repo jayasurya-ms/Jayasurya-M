@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bgimgw from "../assets/bannerw.png";
-import bgimgm from "../assets/bannerm.png";
+import bgimgw from "../assets/bannerw.jpeg";
+import bgimgm from "../assets/bannerm.jpeg";
 
 // Embedded data to replace data.json
 const heroData = {

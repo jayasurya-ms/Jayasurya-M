@@ -1,10 +1,10 @@
 import ProjectGrid from "../components/ProjectGrid";
 import p1image from "../assets/3cbs.png";
-import p2image from "../assets/square.png";
+import p2image from "../assets/squar.jpeg";
 import p3image from "../assets/fortune.png";
 import p4image from "../assets/ds.png";
 import p5image from "../assets/course.png";
-import p6image from "../assets/little.png";
+import p6image from "../assets/littl.jpeg";
 import p7image from "../assets/tech.png";
 
 // Embedded Projects data replacing data.json

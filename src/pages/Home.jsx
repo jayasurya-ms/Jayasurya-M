@@ -6,7 +6,7 @@ import Experience from "../components/Experience";
 import Testimonials from "../components/Testimonials";
 import CallToAction from "../components/CallToAction";
 import p1image from "../assets/3cbs.png";
-import p2image from "../assets/square.png";
+import p2image from "../assets/squar.jpeg";
 import p4image from "../assets/ds.png";
 
 // Embedded Projects data for Home Page (Top 3 projects)

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download, Phone } from "lucide-react";
 import { useState, useEffect } from "react";
-import profile from "../assets/profile.png";
+import profile from "../assets/profil.jpeg";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
